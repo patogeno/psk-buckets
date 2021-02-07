@@ -30,6 +30,9 @@ class Bucket(BaseModel):
 class Category(BaseModel):
     description = models.TextField(max_length=256, blank=True, default="")
 
+    class Meta:
+        verbose_name_plural = "Categories"
+
 
 class Transaction(BaseModel):
     amount = models.DecimalField(max_digits=12, decimal_places=2)
