@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react"
+import axios from "axios"
 import styled from "styled-components"
 import { transactions as data } from "./data"
+import { SERVER_URL } from "../constants"
+import moment from "moment"
 
 const List = styled.table`
     text-align: center;
@@ -28,12 +31,29 @@ export default function TransactionList() {
     const [transactions, setTransactions] = useState([])
 
     useEffect(() => {
-        const ts = data.map((t) => {
-            const date = new Date(t.datetime)
-            const formatted_date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
-            return { ...t, datetime: formatted_date }
-        })
-        setTransactions(ts)
+        const getTransactions = async () => {
+            const options = {
+                url: SERVER_URL + "api/transactions",
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+            }
+            try {
+                const result = await axios(options)
+                const ts = result.data.map((t) => {
+                    return {
+                        ...t,
+                        datetime: moment.utc(t.datetime).format("DD/MM/YYYY"),
+                    }
+                })
+                setTransactions(ts)
+            } catch (error) {
+                console.log("getTransactions", { options, error })
+            }
+        }
+        getTransactions()
     }, [])
 
     return (
