@@ -5,19 +5,19 @@ from .models import Bucket, BankAccount, Category, Transaction
 
 @admin.register(Bucket)
 class BucketAdmin(SafeDeleteAdmin):
-    list_display = (highlight_deleted, "name") + SafeDeleteAdmin.list_display
+    list_display = (highlight_deleted,) + SafeDeleteAdmin.list_display
     list_filter = SafeDeleteAdmin.list_filter
 
 
 @admin.register(BankAccount)
 class BankAccountAdmin(SafeDeleteAdmin):
-    list_display = (highlight_deleted, "name") + SafeDeleteAdmin.list_display
+    list_display = (highlight_deleted,) + SafeDeleteAdmin.list_display
     list_filter = SafeDeleteAdmin.list_filter
 
 
 @admin.register(Category)
 class CategoryAdmin(SafeDeleteAdmin):
-    list_display = (highlight_deleted, "name") + SafeDeleteAdmin.list_display
+    list_display = (highlight_deleted,) + SafeDeleteAdmin.list_display
     list_filter = SafeDeleteAdmin.list_filter
 
 
@@ -25,7 +25,6 @@ class CategoryAdmin(SafeDeleteAdmin):
 class TransactionAdmin(SafeDeleteAdmin):
     list_display = (
         highlight_deleted,
-        "name",
         "get_bucket",
     ) + SafeDeleteAdmin.list_display
     list_filter = (

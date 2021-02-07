@@ -1,6 +1,6 @@
 from django.db import models
 from safedelete.models import SafeDeleteModel, SOFT_DELETE_CASCADE
-
+import datetime
 
 class BaseModel(SafeDeleteModel):
     _safedelete_policy = SOFT_DELETE_CASCADE
@@ -44,4 +44,4 @@ class Transaction(BaseModel):
         Category, on_delete=models.CASCADE, related_name="transactions"
     )
     is_real = models.BooleanField()
-    datetime = models.DateTimeField(auto_now_add=True)
+    datetime = models.DateTimeField(default=datetime.datetime.now)
