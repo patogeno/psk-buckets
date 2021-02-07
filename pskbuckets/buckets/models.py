@@ -17,17 +17,18 @@ class BaseModel(SafeDeleteModel):
 
 
 class BankAccount(BaseModel):
-    pass
+    description = models.TextField(max_length=256, blank=True, default="")
 
 
 class Bucket(BaseModel):
     bank_account = models.ForeignKey(
         BankAccount, on_delete=models.CASCADE, related_name="transactions"
     )
+    description = models.TextField(max_length=256, blank=True, default="")
 
 
 class Category(BaseModel):
-    pass
+    description = models.TextField(max_length=256, blank=True, default="")
 
 
 class Transaction(BaseModel):
