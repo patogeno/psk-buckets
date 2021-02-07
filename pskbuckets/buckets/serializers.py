@@ -3,6 +3,9 @@ from .models import Bucket, BankAccount, Category, Transaction
 
 
 class TransactionSerializer(serializers.ModelSerializer):
+    category_name = serializers.ReadOnlyField(source="category.name")
+    bucket_name = serializers.ReadOnlyField(source="bucket.name")
+
     class Meta:
         model = Transaction
         fields = [
@@ -12,10 +15,13 @@ class TransactionSerializer(serializers.ModelSerializer):
             "name",
             "amount",
             "bucket",
+            "bucket_name",
             "category",
+            "category_name",
             "is_real",
             "datetime",
         ]
+
 
 class TransactionMiniBucketSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,6 +34,7 @@ class TransactionMiniBucketSerializer(serializers.ModelSerializer):
             "is_real",
             "datetime",
         ]
+
 
 class TransactionMiniCategorySerializer(serializers.ModelSerializer):
     class Meta:

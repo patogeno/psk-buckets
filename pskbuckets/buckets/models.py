@@ -2,6 +2,7 @@ from django.db import models
 from safedelete.models import SafeDeleteModel, SOFT_DELETE_CASCADE
 import datetime
 
+
 class BaseModel(SafeDeleteModel):
     _safedelete_policy = SOFT_DELETE_CASCADE
 
@@ -11,6 +12,9 @@ class BaseModel(SafeDeleteModel):
 
     def __str__(self):
         return f"({self.id}) {self.name}"
+
+    def __unicode__(self):
+        return self.name
 
     class Meta:
         abstract = True

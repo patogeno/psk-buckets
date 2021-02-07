@@ -52,8 +52,8 @@ export default function TransactionList() {
                         <td>{transaction.datetime}</td>
                         <td>{transaction.name}</td>
                         <td>{transaction.amount}</td>
-                        <td>{transaction.bucket}</td>
-                        <td>{transaction.category}</td>
+                        <td>{transaction.bucket_name}</td>
+                        <td>{transaction.category_name}</td>
                         <td>{transaction.is_real ? "Real" : "Estimated"}</td>
                     </tr>
                 )
